@@ -1,0 +1,19 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoadDB.Models.Student;
+
+<form id="frm_create" action="/Home/Create" method="post">
+    ID: <input id="txt_id" type="text" name="id"/> <br />
+    Name: <input id="txt_name" type="text" name="name"/> <br />
+    Gender: <input id="chk_gender" type="checkbox" name="gender" value="M"/> 
+    Male/Female <br />
+    Department: <select id="slt_dept" name="dept">
+        @* @foreach(var d in ViewData["dept"]) *@
+        @foreach(var d in ViewBag.dept)
+        {
+            <option value="@d.Id">@d.Name</option>
+        }
+    </select><br />
+    DOB: <input type="date" id="dt_dob" name="dob" /><br />
+    GPA: <input type="text" id="txt_gpa" name="gpa"/> <br />
+    <input type="submit" id="btn_create" value="Create"/>
+</form>
