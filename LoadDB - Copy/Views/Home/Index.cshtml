@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<LoadDB.Models.Student>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>List of Students</h2>
+<a href="/Home/Create"> Create new students</a> <br />
+@{
+    var index = 0;
+}
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Gender radio box</th>
+            <th>Gender combo box</th>
+            <th>Gender checkbox</th>
+
+            <th>GPA</th>
+            <th>Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in ViewBag.st)
+        {
+            <tr>
+                <td id=@($"tbl_{index}_0")>@student.Id</td>
+                <td id=@($"tbl_{index}_1")>@student.Name</td>
+                <td id=@($"tbl_{index}_2")>@student.Dob?.ToString("dd/MM/yyyy")</td>
+                <td id=@($"tbl_{index}_3")>@(student.Gender == true ? "Male" : "Female")</td>
+                <td>
+                    <input type="radio" name=@($"gender_{index}") id=@($"male_{index}") value="true" @(student.Gender == true ? "checked" : "") /> <label for=@($"male_{index}")>Male</label>
+                    <input type="radio" name=@($"gender_{index}") id=@($"female_{index}") value="false" @(student.Gender == false ? "checked" : "") /> <label for=@($"female_{index}")>Female</label>
+                </td>
+                <td>
+                    <select id=@($"gender_combobox_{index}") name=@($"gender_{index}")>
+                        <option value="true" @(student.Gender == true ? "selected" : "")>Male</option>
+                        <option value="false" @(student.Gender == false ? "selected" : "")>Female</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="checkbox" id=@($"male_{index}") name=@($"male_{index}") value="true" @(student.Gender == true ? "checked" : "") /> <label for=@($"male_{index}")>Male</label>
+                    <input type="checkbox" id=@($"female_{index}") name=@($"female_{index}") value="true" @(student.Gender == false ? "checked" : "") /> <label for=@($"female_{index}")>Female</label>
+                </td>
+                <td id=@($"tbl_{index}_4")>@student.Gpa</td>
+                <td id=@($"tbl_{index}_5")>@student.Depart.Name</td>
+            </tr>
+                index++;
+        }
+    </tbody>
+</table>
